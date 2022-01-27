@@ -1,0 +1,32 @@
+<label>Server Name - one way binding</label>
+<input  type="text" 
+        class="form-control"
+        (input) = "onUpdateServerName($event)">
+
+<label>Server Name - two way binding</label>
+<input  type="text" 
+        class="form-control"
+        [(ngModel)] = "serverName">
+
+<!-- <p>{{serverName}}</p> -->
+
+<button class="btn btn-primary" 
+        [disabled]="!allowNewServer" 
+        (click)="onCreateServer()">Add Server</button>
+
+<p>{{allowNewServer}}</p>
+<p>{{serverCreationStatus}}</p>
+
+<app-server></app-server>
+<app-server></app-server>
+
+<h1> Directives </h1>
+
+<!-- *ngIf este o directiva care este deja existenta in Angular, putem construi si directive custom
+    steluta * din *ngIf semnifica faptul ca este o directiva structurala care modifica Domul-->
+<p *ngIf = "serverCreated; else noServer"> Server was created, server name is {{serverName}} </p>
+<ng-template #noServer> 
+    <p> No server was created! </p>
+</ng-template>
+
+<app-server *ngFor="let server of servers"></app-server>
